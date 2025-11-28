@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-deployment
+  namespace: restaurant-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      labels:
+        app: order
+    spec:
+      containers:
+      - name: order
+        image: order-service:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 3002
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+  namespace: restaurant-demo
+spec:
+  selector:
+    app: order
+  ports:
+    - port: 3002
+      targetPort: 3002
