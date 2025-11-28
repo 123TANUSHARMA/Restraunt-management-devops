@@ -5,13 +5,15 @@ on:
     branches: [ "main" ]
 
 env:
-  DOCKERHUB_REPO: ${{ secrets.DOCKERHUB_USER }}
+  DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -25,35 +27,35 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push menu-service image
+      - name: Build & push menu-service
         uses: docker/build-push-action@v4
         with:
           context: ./menu-service
           push: true
           tags: ${{ secrets.DOCKERHUB_USER }}/menu-service:latest
 
-      - name: Build and push order-service image
+      - name: Build & push order-service
         uses: docker/build-push-action@v4
         with:
           context: ./order-service
           push: true
           tags: ${{ secrets.DOCKERHUB_USER }}/order-service:latest
 
-      - name: Build and push payment-service image
+      - name: Build & push payment-service
         uses: docker/build-push-action@v4
         with:
           context: ./payment-service
           push: true
           tags: ${{ secrets.DOCKERHUB_USER }}/payment-service:latest
 
-      - name: Build and push reservation-service image
+      - name: Build & push reservation-service
         uses: docker/build-push-action@v4
         with:
           context: ./reservation-service
           push: true
           tags: ${{ secrets.DOCKERHUB_USER }}/reservation-service:latest
 
-      - name: Build and push api-gateway image
+      - name: Build & push api-gateway
         uses: docker/build-push-action@v4
         with:
           context: ./api-gateway
