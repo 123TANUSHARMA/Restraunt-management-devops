@@ -279,40 +279,60 @@ export default function Orders() {
             </div>
 
             {/* Success Response */}
-            {orderResponse && (
-              <div className="mt-6 p-6 bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-300 rounded-xl animate-fadeIn">
-                <div className="flex items-start gap-4">
-                  <CheckCircle className="w-8 h-8 text-green-600 flex-shrink-0" />
-                  <div className="flex-1">
-                    <h4 className="text-xl font-bold text-green-800 mb-3">
-                      Order Created Successfully! 🎉
-                    </h4>
-                    <div className="bg-white p-4 rounded-lg border border-green-200">
-                      <div className="grid grid-cols-2 gap-4 text-sm">
-                        <div>
-                          <span className="font-semibold text-gray-600">Order ID:</span>
-                          <span className="ml-2 font-bold text-gray-900">{orderResponse.id}</span>
-                        </div>
-                        <div>
-                          <span className="font-semibold text-gray-600">Table:</span>
-                          <span className="ml-2 font-bold text-gray-900">{orderResponse.tableId}</span>
-                        </div>
-                        <div>
-                          <span className="font-semibold text-gray-600">Status:</span>
-                          <span className="ml-2 px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-bold">
-                            {orderResponse.status || 'Pending'}
-                          </span>
-                        </div>
-                        <div>
-                          <span className="font-semibold text-gray-600">Items:</span>
-                          <span className="ml-2 font-bold text-gray-900">{orderResponse.items?.length || items.length}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
+{orderResponse && (
+  <div className="mt-6 p-6 bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-300 rounded-xl animate-fadeIn">
+    <div className="flex items-start gap-4">
+      <CheckCircle className="w-8 h-8 text-green-600 flex-shrink-0" />
+      <div className="flex-1">
+        <h4 className="text-xl font-bold text-green-800 mb-3">
+          Order Created Successfully! 🎉
+        </h4>
+
+        <div className="bg-white p-4 rounded-lg border border-green-200">
+          <div className="grid grid-cols-2 gap-4 text-sm">
+
+            <div>
+              <span className="font-semibold text-gray-600">Order ID:</span>
+              <span className="ml-2 font-bold text-gray-900">
+                {orderResponse.orderId}
+              </span>
+            </div>
+
+            <div>
+              <span className="font-semibold text-gray-600">Table:</span>
+              <span className="ml-2 font-bold text-gray-900">{tableId}</span>
+            </div>
+
+            <div>
+              <span className="font-semibold text-gray-600">Status:</span>
+              <span className="ml-2 px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-bold">
+                {orderResponse.status}
+              </span>
+            </div>
+
+            <div>
+              <span className="font-semibold text-gray-600">Items:</span>
+              <span className="ml-2 font-bold text-gray-900">
+                {items.length}
+              </span>
+            </div>
+
+            <div>
+              <span className="font-semibold text-gray-600">Total:</span>
+              <span className="ml-2 font-bold text-gray-900">
+                ${orderResponse.total.toFixed(2)}
+              </span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+)}
+
+
           </div>
         </div>
 
@@ -357,62 +377,69 @@ export default function Orders() {
             </div>
 
             {/* Order Details */}
-            {orderData && (
-              <div className="p-6 bg-gradient-to-br from-gray-50 to-indigo-50 border-2 border-indigo-200 rounded-xl">
-                <div className="flex items-center gap-3 mb-6">
-                  <Receipt className="w-8 h-8 text-indigo-600" />
-                  <h4 className="text-2xl font-bold text-gray-800">Order Details</h4>
-                </div>
+    {orderData && (
+  <div className="p-6 bg-gradient-to-br from-gray-50 to-indigo-50 border-2 border-indigo-200 rounded-xl">
 
-                <div className="grid md:grid-cols-2 gap-6 mb-6">
-                  <div className="p-4 bg-white rounded-lg shadow-sm">
-                    <div className="text-sm font-semibold text-gray-500 mb-1">Order ID</div>
-                    <div className="text-2xl font-bold text-gray-900">#{orderData.id}</div>
-                  </div>
+    <div className="flex items-center gap-3 mb-6">
+      <Receipt className="w-8 h-8 text-indigo-600" />
+      <h4 className="text-2xl font-bold text-gray-800">Order Details</h4>
+    </div>
 
-                  <div className="p-4 bg-white rounded-lg shadow-sm">
-                    <div className="text-sm font-semibold text-gray-500 mb-1">Table Number</div>
-                    <div className="text-2xl font-bold text-gray-900">Table {orderData.tableId}</div>
-                  </div>
+    <div className="grid md:grid-cols-2 gap-6 mb-6">
+      
+      <div className="p-4 bg-white rounded-lg shadow-sm">
+        <div className="text-sm font-semibold text-gray-500 mb-1">Order ID</div>
+        <div className="text-2xl font-bold text-gray-900">#{orderData.id}</div>
+      </div>
 
-                  <div className="p-4 bg-white rounded-lg shadow-sm">
-                    <div className="text-sm font-semibold text-gray-500 mb-1">Status</div>
-                    <div className="mt-2">
-                      <span className="px-4 py-2 bg-yellow-100 text-yellow-800 rounded-full font-bold">
-                        {orderData.status || 'Pending'}
-                      </span>
-                    </div>
-                  </div>
+      <div className="p-4 bg-white rounded-lg shadow-sm">
+        <div className="text-sm font-semibold text-gray-500 mb-1">Table Number</div>
+        <div className="text-2xl font-bold text-gray-900">
+          Table {orderData.data?.tableId}
+        </div>
+      </div>
 
-                  <div className="p-4 bg-white rounded-lg shadow-sm">
-                    <div className="text-sm font-semibold text-gray-500 mb-1">Created At</div>
-                    <div className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                      <Clock className="w-5 h-5 text-gray-400" />
-                      {orderData.createdAt ? new Date(orderData.createdAt).toLocaleString() : 'N/A'}
-                    </div>
-                  </div>
-                </div>
+      <div className="p-4 bg-white rounded-lg shadow-sm">
+        <div className="text-sm font-semibold text-gray-500 mb-1">Total</div>
+        <div className="text-xl font-bold text-indigo-600">
+          ${orderData.total.toFixed(2)}
+        </div>
+      </div>
 
-                {orderData.items && orderData.items.length > 0 && (
-                  <div className="bg-white rounded-lg p-6 shadow-sm">
-                    <h5 className="font-bold text-gray-800 mb-4 text-lg">Order Items</h5>
-                    <div className="space-y-3">
-                      {orderData.items.map((item, idx) => (
-                        <div key={idx} className="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
-                          <div>
-                            <div className="font-semibold text-gray-900">{getItemName(item.id)}</div>
-                            <div className="text-sm text-gray-500">Quantity: {item.qty}</div>
-                          </div>
-                          <div className="font-bold text-indigo-600">
-                            ${(getItemPrice(item.id) * item.qty).toFixed(2)}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
+      <div className="p-4 bg-white rounded-lg shadow-sm">
+        <div className="text-sm font-semibold text-gray-500 mb-1">Status</div>
+        <span className="px-4 py-2 bg-yellow-100 text-yellow-800 rounded-full font-bold">
+          CREATED
+        </span>
+      </div>
+
+    </div>
+
+    {orderData.data?.items?.length > 0 && (
+      <div className="bg-white rounded-lg p-6 shadow-sm">
+        <h5 className="font-bold text-gray-800 mb-4 text-lg">Order Items</h5>
+
+        {orderData.data.items.map((item, idx) => (
+          <div key={idx} className="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+
+            <div>
+              <div className="font-semibold text-gray-900">{getItemName(item.id)}</div>
+              <div className="text-sm text-gray-500">Qty: {item.qty}</div>
+            </div>
+
+            <div className="font-bold text-indigo-600">
+              ${(getItemPrice(item.id) * item.qty).toFixed(2)}
+            </div>
+
+          </div>
+        ))}
+      </div>
+    )}
+
+  </div>
+)}
+
+
           </div>
         </div>
       </div>

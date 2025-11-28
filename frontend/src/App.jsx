@@ -9,7 +9,7 @@ export default function App(){
   return (
     <div className="min-h-screen flex">
       <aside className="w-64 bg-white border-r p-4">
-        <h1 className="text-xl font-bold mb-6">Restaurant Demo</h1>
+        <h1 className="text-xl font-bold mb-6">Restaurant </h1>
         <nav className="space-y-2">
           <Link className="block p-2 rounded hover:bg-gray-100" to="/">Menu</Link>
           <Link className="block p-2 rounded hover:bg-gray-100" to="/orders">Orders</Link>
